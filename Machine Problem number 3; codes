@@ -1,2 +1,28 @@
 # Machine-Problem-3-MATLAB
 
+function[a] = mp3
+ 
+p = input('Please enter data points: ');
+ 
+if length(p)-1 > 10
+    error 'Please enter data points limited upto the 10th degree.'
+end
+ 
+for n = 1:length(p)-1
+    x = polyfit(p(:,1), p(:,2), n);
+    val = polyval(x, p(:,1));
+    y = norm( p(:,2) - val);
+    v = [n, y]
+    
+    if n == 1
+        i = v;
+    end
+    
+    if i(2) >= v(2)
+        d = v(1);
+    end
+end
+ 
+a = polyfit(p(:,1), p(:,2), d);
+fprintf('The coefficients are: %f\n', a)
+end
